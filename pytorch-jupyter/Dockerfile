@@ -10,4 +10,5 @@ ADD ./jupyter_notebook_config.py /root/.jupyter/
 # https://github.com/ipython/ipython/issues/7062
 RUN mkdir -p /scripts
 ADD ./run_jupyter.sh /scripts/
+RUN chmod -R a+x /scripts
 ENTRYPOINT ["/scripts/run_jupyter.sh"]
