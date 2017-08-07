@@ -16,7 +16,7 @@ RUN curl -o ~/miniconda.sh -O  https://repo.continuum.io/miniconda/Miniconda3-4.
     ~/miniconda.sh -b -p /opt/conda && \
     rm ~/miniconda.sh && \
     /opt/conda/bin/conda install conda-build && \
-    /opt/conda/bin/conda create -y --name pytorch-py35 python=3.5.2 numpy pyyaml scipy ipython mkl&& \
+    /opt/conda/bin/conda create -y --name pytorch-py35 python=3.5.2 numpy pyyaml scipy ipython jupyter mkl&& \
     /opt/conda/bin/conda clean -ya
 ENV PATH /opt/conda/envs/pytorch-py35/bin:$PATH
 RUN conda install --name pytorch-py35 -c soumith magma-cuda80
