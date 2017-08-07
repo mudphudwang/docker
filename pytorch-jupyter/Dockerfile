@@ -6,4 +6,4 @@ EXPOSE 8888
 
 ADD ./jupyter_notebook_config.py /root/.jupyter/
 
-CMD ["jupyter", "notebook", "--allow-root"]
+ENTRYPOINT ["jupyter", "notebook", "--allow-root"]

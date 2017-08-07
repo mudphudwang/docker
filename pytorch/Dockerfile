@@ -8,18 +8,29 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
          vim \
          ca-certificates \
          libjpeg-dev \
-         libpng-dev \
-         python3.5 \
-         python3-pip &&\
+         libpng-dev &&\
      rm -rf /var/lib/apt/lists/*
 
-RUN update-alternatives --install /usr/bin/python python /usr/bin/python3.5 0 &&\
-    update-alternatives --install /usr/bin/pip pip /usr/bin/pip3 0
+RUN curl -o ~/miniconda.sh -O  https://repo.continuum.io/miniconda/Miniconda3-4.2.12-Linux-x86_64.sh  && \
+    chmod +x ~/miniconda.sh && \
+    ~/miniconda.sh -b -p /opt/conda && \
+    rm ~/miniconda.sh && \
+    /opt/conda/bin/conda install conda-build && \
+    /opt/conda/bin/conda create -y --name pytorch-py35 python=3.5.2 numpy pyyaml scipy ipython mkl&& \
+    /opt/conda/bin/conda clean -ya
+ENV PATH /opt/conda/envs/pytorch-py35/bin:$PATH
+RUN conda install --name pytorch-py35 -c soumith magma-cuda80
+# This must be done before pip so that requirements.txt is available
 
-RUN pip install --upgrade pip
-RUN pip install setuptools numpy scipy pandas matplotlib
-RUN pip install http://download.pytorch.org/whl/cu80/torch-0.2.0.post1-cp35-cp35m-manylinux1_x86_64.whl
-RUN pip install torchvision
+RUN git clone https://github.com/pytorch/pytorch /opt/pytorch
+
+WORKDIR /opt/pytorch
+
+RUN TORCH_CUDA_ARCH_LIST="3.5 5.2 6.0 6.1+PTX" TORCH_NVCC_FLAGS="-Xfatbin -compress-all" \
+    CMAKE_PREFIX_PATH="$(dirname $(which conda))/../" \
+    pip install -v .
+
+RUN git clone https://github.com/pytorch/vision.git && cd vision && pip install -v .
 
 ENV LANG en_US.UTF-8
 
