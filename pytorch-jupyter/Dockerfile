@@ -1,4 +1,9 @@
-FROM atlab/pytorch
+# v1.0-cuda10.0
+
+FROM mudphudwang/pytorch:v1.0-cuda10.0
+
+RUN /opt/conda/bin/conda install -y -c conda-forge jupyterlab=0.35.4 && \
+     /opt/conda/bin/conda clean -ya
 
 EXPOSE 8888
 
