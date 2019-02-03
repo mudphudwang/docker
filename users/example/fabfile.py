@@ -8,5 +8,8 @@ ENV_PATH = abspath('.env')
 
 d = Deploy(REPO_FORK, REPO_BRANCH, ENV_PATH)
 
-def deploy(script=None, n=10, gpus=1, token=None):
+def deploy_atlab(script=None, n=10, gpus=1, token=None):
     d.deploy('atlab', script, n, gpus, token)
+
+def stop_atlab(script=None):
+    d.stop('atlab', script)

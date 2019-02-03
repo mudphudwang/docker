@@ -196,6 +196,7 @@ class Deploy():
                         warn_only=True)
                     run('{} {} --name {} {}'.format(gpu_run_str, args, name, service))
                 else:
+                    name = name.format(script=script)
                     # args += ' -v {}:/testing/scripts'.format(join(self.userdir, 'scripts'))
                     pass
 
@@ -204,9 +205,10 @@ class Deploy():
 
         remove_old_images()
 
-        # if script is None:
-        #     arg_str = '-e NVIDIA_VISIBLE_DEVICES=0, -p 4440:8888'
-        #     run(run_str.format(args=arg_str))
+    def stop(self, service, script=None):
+        wildcard = self.user + '_' + service + '_{script}'
+        wildcard = wildcard.format('notebook' if script is None else script)
+        stop(wildcard)
 
 
 def test(n=10, gpus=1):
