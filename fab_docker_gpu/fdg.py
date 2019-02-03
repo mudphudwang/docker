@@ -191,6 +191,7 @@ class Deploy():
 
                 if script is None:
                     args = '-p 444{}:8888'.format(gpu_ids[0])
+                    args += ' -v {}:/testing/scripts'.format(join(self.userdir, 'scripts'))
                     name = name.format(script='notebook')
                     run('(docker ps -a | grep {name}) && docker rm {name}'.format(name=name),
                         warn_only=True)
@@ -207,8 +208,8 @@ class Deploy():
 
     def stop(self, service, script=None):
         wildcard = self.user + '_' + service + '_{script}'
-        wildcard = wildcard.format('notebook' if script is None else script)
-        stop(wildcard)
+        wildcard = wildcard.format(script='notebook' if script is None else script)
+        stop('{}*'.format(wildcard))
 
 
 def test(n=10, gpus=1):
