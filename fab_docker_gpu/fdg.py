@@ -174,7 +174,7 @@ class Deploy():
         self.initialize()
         with cd(self.userdir):
             run('docker-compose build --no-cache --build-arg ssh_prv_key="$(cat ~/.ssh/id_rsa)" --build-arg ssh_pub_key="$(cat ~/.ssh/id_rsa.pub)" {}'.format(service))
-            run_str = 'docker-compose run -d {args} ' + service
+            bare_run_str = 'docker-compose run -d {args} ' + service
 
             gpu_i = 0
             container_i = 0
@@ -188,7 +188,7 @@ class Deploy():
                 name = '--name '+self.user + '_' + service + '_{script}_' + '_'.join(gpu_ids)
                 args = ('-e NVIDIA_VISIBLE_DEVICES={}'.format(','.join(gpu_ids))
                                + ' {args} ' + name)
-                run_str = run_str.format(args=args)
+                run_str = bare_run_str.format(args=args)
 
                 if script is None:
                     args = '-p 444{}:8888'.format(gpu_ids[0])
