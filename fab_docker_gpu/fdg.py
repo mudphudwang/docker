@@ -185,15 +185,18 @@ class Deploy():
                 if len(gpu_ids) < gpus or container_i >= n:
                     break
 
-                name = '--name '+self.user + '_' + service + '_{script}_' + '_'.join(gpu_ids)
-                args = ('-e NVIDIA_VISIBLE_DEVICES={}'.format(','.join(gpu_ids))
-                               + ' {args} ' + name)
+                name = self.user + '_' + service + '_{script}_' + '_'.join(gpu_ids)
+                args = '-e NVIDIA_VISIBLE_DEVICES={}'.format(','.join(gpu_ids)) + ' {args}'
                 run_str = bare_run_str.format(args=args)
 
                 if script is None:
                     args = '-p 444{}:8888'.format(gpu_ids[0])
+                    name = name.format(script='notebook')
+                    run('docker rm {}'.format(name))
+                    run(run_str.format(args=args) + ' --name ' + name)
+                else:
                     # args += ' -v {}:/testing/scripts'.format(join(self.userdir, 'scripts'))
-                    run(run_str.format(args=args, script='notebook'))
+                    pass
 
                 gpu_i = gpu_j
                 container_i += 1
