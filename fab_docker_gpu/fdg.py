@@ -197,7 +197,7 @@ class Deploy():
         if self.env_path is not None:
             local('scp ' + self.env_path + ' ' + env.host_string + ':' + self.basedir)
 
-    def testing(self):
+    def testing(self, token=None):
         self.initialize()
         with cd(self.userdir):
             run('docker-compose build --no-cache --build-arg ssh_prv_key="$(cat ~/.ssh/id_rsa)" --build-arg ssh_pub_key="$(cat ~/.ssh/id_rsa.pub)"')
