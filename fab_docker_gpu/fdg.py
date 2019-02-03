@@ -175,9 +175,10 @@ class Deploy():
 
     def __init__(self, repo_fork='atlab', repo_branch='master', env_path=None):
         self.basedir = join('/home', env.user, 'deploy')
+        self.user = basename(dirname(abspath((inspect.stack()[1])[1])))
+        self.userdir = join(self.basedir, 'docker', 'users', self.user)
         self.repo_fork = repo_fork
         self.repo_branch = repo_branch
-        self.user = basename(dirname(abspath((inspect.stack()[1])[1])))
         self.env_path = env_path
     
     def initialize(self):
@@ -194,7 +195,7 @@ class Deploy():
                 run('git clone git@github.com:{}/docker.git -b {} --single-branch'.format(
                     self.repo_fork, self.repo_branch))
         if self.env_path is not None:
-            local('scp ' + self.env_path + ' ' + env.host_string + ':' + self.basedir)
+            local('scp ' + self.env_path + ' ' + env.host_string + ':' + self.userdir)
 
     def testing(self):
         self.initialize()
