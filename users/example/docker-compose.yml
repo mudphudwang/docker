@@ -1,7 +1,8 @@
 version: '3'
 services:
   atlab:
-    env_file: /home/${USER}/deploy/.env
+    build: .
+    env_file: /home/ewang/deploy/.env
     volumes:
       - /home/notebooks/:/notebooks/
       - /tmp/:/tmp/
