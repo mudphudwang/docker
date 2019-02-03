@@ -3,7 +3,7 @@ services:
   atlab:
     build:
       context: .
-    env_file: /home/ewang/deploy/.env
+    env_file: /home/${USER}/deploy/.env
     volumes:
       - /home/notebooks/:/notebooks/
       - /tmp/:/tmp/
