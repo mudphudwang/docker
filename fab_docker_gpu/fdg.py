@@ -200,6 +200,8 @@ class Deploy():
 
                 gpu_i = gpu_j
                 container_i += 1
+        
+        remove_old_images()
 
             # if script is None:
             #     arg_str = '-e NVIDIA_VISIBLE_DEVICES=0, -p 4440:8888'
