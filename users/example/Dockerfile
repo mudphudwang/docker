@@ -26,3 +26,5 @@ RUN git clone git@github.com:atlab/attorch.git -b pytorch0.4.0 --single-branch
 FROM mudphudwang/pytorch-jupyter:bionic-pytorch1.0-cuda10.0-v0
 COPY --from=intermediate /src/attorch /src/attorch
 RUN pip install -e /src/attorch
+
+ENTRYPOINT ["/scripts/run_jupyter.sh --NotebookApp.token=${JUPYTER_TOKEN}"]
