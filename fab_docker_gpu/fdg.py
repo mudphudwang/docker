@@ -194,7 +194,7 @@ class Deploy():
                     name = name.format(script='notebook')
                     run('(docker images | grep {name}) && docker rm {name}'.format(name=name),
                         warn_only=True)
-                    run(gpu_run_str + args + ' --name {} '.format(name) + service)
+                    run('{} {} --name {} {}'.format(gpu_run_str, args, name, service))
                 else:
                     # args += ' -v {}:/testing/scripts'.format(join(self.userdir, 'scripts'))
                     pass
