@@ -149,7 +149,7 @@ class Deploy():
         self.repo_fork = repo_fork
         self.repo_branch = repo_branch
         self.env_path = env_path
-    
+
     def initialize(self):
         if exists(join(self.basedir, 'docker')):
             with cd(join(self.basedir, 'docker')):
@@ -157,7 +157,7 @@ class Deploy():
                 run('git pull origin {}'.format(self.repo_branch))
                 run('git checkout {}'.format(self.repo_branch))
                 run('git reset --hard origin/{}'.format(self.repo_branch))
-                run('git clean -fd')  
+                run('git clean -fd')
         else:
             run('mkdir -p {}'.format(self.basedir))
             with cd(self.basedir):
@@ -185,23 +185,22 @@ class Deploy():
                 if len(gpu_ids) < gpus or container_i >= n:
                     break
 
-                nvidia_devs = '-e NVIDIA_VISIBLE_DEVICES={}'.format(','.join(gpu_ids)) + ' {args} '
-                run_str = run_str.format(args=nvidia_devs)
+                name = '--name '+self.user + '_' + service + '_{script}_' + '_'.join(gpu_ids)
+                args = ('-e NVIDIA_VISIBLE_DEVICES={}'.format(','.join(gpu_ids))
+                               + ' {args} ' + name)
+                run_str = run_str.format(args=args)
 
                 if script is None:
                     args = '-p 444{}:8888'.format(gpu_ids[0])
-                    args += ' -v {}:/testing/scripts'.format(join(self.userdir, 'scripts'))
-                    run(run_str.format(args=args))
+                    # args += ' -v {}:/testing/scripts'.format(join(self.userdir, 'scripts'))
+                    run(run_str.format(args=args, script='notebook'))
 
                 gpu_i = gpu_j
                 container_i += 1
 
-
             # if script is None:
             #     arg_str = '-e NVIDIA_VISIBLE_DEVICES=0, -p 4440:8888'
             #     run(run_str.format(args=arg_str))
-
-
 
 
 def test(n=10, gpus=1):
@@ -244,4 +243,3 @@ def test(n=10, gpus=1):
 #                                                                    service, gpu))
 #             run('nvidia-docker-compose -t {} up -d {}{};'.format(yml_file, service, gpu))
 #     puts('started service {} on {} on GPUs {}'.format(env.host_string, service, ' '.join(gpus)))
-
