@@ -1,7 +1,7 @@
 version: '3'
 services:
   atlab:
-    build: .
+    # build: .
     volumes:
       - /home/notebooks/:/notebooks/
       - /tmp/:/tmp/
