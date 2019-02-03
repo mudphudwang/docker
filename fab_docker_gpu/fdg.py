@@ -194,7 +194,7 @@ class Deploy():
                     name = name.format(script='notebook')
                     args = '-p 444{}:8888'.format(gpu_ids[0])
                     if token is not None:
-                        args += ' --NotebookApp.token={}'.format(token)
+                        service += ' --NotebookApp.token={}'.format(token)
                 else:
                     name = name.format(script=script)
                     args = ' -v {}:/scripts'.format(join(self.userdir, 'scripts'))
