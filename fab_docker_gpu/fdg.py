@@ -192,7 +192,7 @@ class Deploy():
                 if script is None:
                     args = '-p 444{}:8888'.format(gpu_ids[0])
                     name = name.format(script='notebook')
-                    container_exists = run('docker images | grep {name})')
+                    container_exists = run('docker images | grep {name}')
                     print(container_exists)
                     print(type(container_exists))
                     run(gpu_run_str + args + ' --name ' + name + service)
