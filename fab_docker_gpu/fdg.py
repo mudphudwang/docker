@@ -173,11 +173,12 @@ class Deploy():
 
         self.initialize()
         with cd(self.userdir):
-            # run('docker-compose build --no-cache --build-arg ssh_prv_key="$(cat ~/.ssh/id_rsa)" --build-arg ssh_pub_key="$(cat ~/.ssh/id_rsa.pub)" {}'.format(service))
+            run('docker-compose build --no-cache --build-arg ssh_prv_key="$(cat ~/.ssh/id_rsa)" --build-arg ssh_pub_key="$(cat ~/.ssh/id_rsa.pub)" {}'.format(service))
             bare_run_str = 'docker-compose run -d'
 
             gpu_i = 0
             container_i = 0
+            gpu_groups = []
             while gpu_i < len(free_gpus):
                 gpu_j = gpu_i + gpus
                 gpu_ids = free_gpus[gpu_i: gpu_j]
@@ -192,11 +193,13 @@ class Deploy():
                 if script is None:
                     name = name.format(script='notebook')
                     args = '-p 444{}:8888'.format(gpu_ids[0])
+                    if token is not None:
+                        args += ' --NotebookApp.token={}'.format(token)
                 else:
                     name = name.format(script=script)
                     args = ' -v {}:/scripts'.format(join(self.userdir, 'scripts'))
                     args += ' --entrypoint "python3 /scripts/{}.py"'.format(script)
-                
+
                 run('(docker ps -a | grep {name}) && docker rm {name}'.format(name=name),
                     warn_only=True)
                 run('{} {} --name {} {}'.format(gpu_run_str, args, name, service))
@@ -204,51 +207,12 @@ class Deploy():
                 gpu_i = gpu_j
                 container_i += 1
 
+                gpu_groups.append(','.join(gpu_ids))
+
         remove_old_images()
+        puts('started service {} on {} on GPUs {}'.format(env.host_string, service, ' '.join(gpu_groups)))
 
     def stop(self, service, script=None):
         wildcard = self.user + '_' + service + '_{script}'
         wildcard = wildcard.format(script='notebook' if script is None else script)
         stop('{}*'.format(wildcard))
-
-
-def test(n=10, gpus=1):
-    gpus = int(gpus)
-    n = int(n)
-
-    free_gpus = sorted(free_gpu_slots())
-    gpu_i = 0
-    container_i = 0
-    while gpu_i < len(free_gpus):
-        gpu_j = gpu_i + gpus
-        gpu_ids = free_gpus[gpu_i: gpu_j]
-
-        if len(gpu_ids) < gpus or container_i >= n:
-            break
-
-        print(','.join(gpu_ids))
-        print(gpu_ids[0])
-
-        gpu_i = gpu_j
-        container_i += 1
-    print(env.host_string)
-
-# def deploy(yml_file, service, n=None, rebuild=False):
-#     project_dir = join(env.basedir, 'network-search-8')
-#     gpus = free_gpu_slots()
-#     rebuild = strtobool(str(rebuild))
-
-#     if len(gpus) == 0:
-#         puts('No free GPUs found')
-#         return
-
-#     if n is not None:
-#         gpus = gpus[:int(n)]
-
-#     with cd(project_dir), shell_env(HOSTNAME=env.host_string):
-#         for gpu in gpus:
-#             run('nvidia-docker-compose -t {} build {} {}{}'.format(yml_file,
-#                                                                    '' if not rebuild else '--no-cache',
-#                                                                    service, gpu))
-#             run('nvidia-docker-compose -t {} up -d {}{};'.format(yml_file, service, gpu))
-#     puts('started service {} on {} on GPUs {}'.format(env.host_string, service, ' '.join(gpus)))
