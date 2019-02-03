@@ -195,7 +195,7 @@ class Deploy():
                 else:
                     name = name.format(script=script)
                     args = ' -v {}:/scripts'.format(join(self.userdir, 'scripts'))
-                    args += ' --entrypoint python3 /scripts/{}.py'.format(script)
+                    args += ' --entrypoint "python3 /scripts/{}.py"'.format(script)
                 
                 run('(docker ps -a | grep {name}) && docker rm {name}'.format(name=name),
                     warn_only=True)
