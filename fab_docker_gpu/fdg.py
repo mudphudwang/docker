@@ -185,7 +185,7 @@ class Deploy():
                 if len(gpu_ids) < gpus or container_i >= n:
                     break
 
-                nvidia_devs = '-e NVIDIA_VISIBLE_DEVICES={}'.format(','.join(gpu_ids)) + '{args} '
+                nvidia_devs = '-e NVIDIA_VISIBLE_DEVICES={}'.format(','.join(gpu_ids)) + ' {args} '
                 run_str = run_str.format(args=nvidia_devs)
 
                 if script is None:
