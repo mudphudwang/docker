@@ -27,4 +27,6 @@ FROM mudphudwang/pytorch-jupyter:bionic-pytorch1.0-cuda10.0-v0
 COPY --from=intermediate /src/attorch /src/attorch
 RUN pip install -e /src/attorch
 
+ENV JUP_TOK JUPYTER_TOKEN
+
 ENTRYPOINT ["/scripts/run_jupyter.sh"]
