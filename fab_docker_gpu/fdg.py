@@ -102,6 +102,11 @@ def remove_old_images():
         run('docker image prune -f')
 
 
+def clean():
+    remove_old_containers()
+    remove_old_images()
+
+
 def containers():
     with hide('running'):
         ret = run("docker ps --format '{{.Names}} -> {{.ID}}'")
@@ -162,9 +167,41 @@ class Deploy():
             local('scp ' + self.env_path + ' ' + env.host_string + ':' + self.basedir)
 
     def deploy(self, service, script=None, n=10, gpus=1, token=None):
+        gpus = int(gpus)
+        n = int(n)
+        free_gpus = sorted(free_gpu_slots())
+
         self.initialize()
         with cd(self.userdir):
             run('docker-compose build --no-cache --build-arg ssh_prv_key="$(cat ~/.ssh/id_rsa)" --build-arg ssh_pub_key="$(cat ~/.ssh/id_rsa.pub)" {}'.format(service))
+            run_str = 'docker-compose run -d {args} ' + service
+
+            gpu_i = 0
+            container_i = 0
+            while gpu_i < len(free_gpus):
+                gpu_j = gpu_i + gpus
+                gpu_ids = free_gpus[gpu_i: gpu_j]
+
+                if len(gpu_ids) < gpus or container_i >= n:
+                    break
+
+                nvidia_devs = '-e NVIDIA_VISIBLE_DEVICES={}'.format(','.join(gpu_ids)) + '{args} '
+                run_str = run_str.format(args=nvidia_devs)
+
+                if script is None:
+                    args = '-p 444{}:8888'.format(gpu_ids[0])
+                    args += ' -v {}:/testing/scripts'.format(join(self.userdir, 'scripts'))
+                    run(run_str.format(args=args))
+
+                gpu_i = gpu_j
+                container_i += 1
+
+
+            # if script is None:
+            #     arg_str = '-e NVIDIA_VISIBLE_DEVICES=0, -p 4440:8888'
+            #     run(run_str.format(args=arg_str))
+
+
 
 
 def test(n=10, gpus=1):
@@ -181,7 +218,8 @@ def test(n=10, gpus=1):
         if len(gpu_ids) < gpus or container_i >= n:
             break
 
-        print(gpu_ids)
+        print(','.join(gpu_ids))
+        print(gpu_ids[0])
 
         gpu_i = gpu_j
         container_i += 1
