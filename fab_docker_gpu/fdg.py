@@ -194,8 +194,8 @@ class Deploy():
                     args = '-p 444{}:8888'.format(gpu_ids[0])
                 else:
                     name = name.format(script=script)
-                    args = ' -v {}:/testing/scripts'.format(join(self.userdir, 'scripts'))
-                    args += ' --entrypoint python3 {}.py'.format(script)
+                    args = ' -v {}:/scripts'.format(join(self.userdir, 'scripts'))
+                    args += ' --entrypoint python3 /scripts/{}.py'.format(script)
                 
                 run('(docker ps -a | grep {name}) && docker rm {name}'.format(name=name),
                     warn_only=True)
