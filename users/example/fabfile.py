@@ -5,11 +5,8 @@ REPO_FORK = 'mudphudwang'
 REPO_BRANCH = 'master'
 ENV_PATH = abspath('.env')
 
-def test_build():
-    run('docker build -t test /home/ewang/nas-project/code/docker/configs/example/ --build-arg ssh_prv_key="$(cat ~/.ssh/id_rsa)" --build-arg ssh_pub_key="$(cat ~/.ssh/id_rsa.pub)"')
 
-deploy = Deploy(REPO_FORK, REPO_BRANCH, ENV_PATH)
+d = Deploy(REPO_FORK, REPO_BRANCH, ENV_PATH)
 
-def testing():
-    print(ENV_PATH)
-    deploy.testing()
+def deploy(script=None, n=10, gpus=1, token=None):
+    d.deploy('atlab', script, n, gpus, token)

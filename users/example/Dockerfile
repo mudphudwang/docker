@@ -1,6 +1,6 @@
 # Intermediate Container for private github repositories
 
-FROM mudphudwang/pytorch-jupyter:bionic-pytorch1.0-cuda10.0-v0 as intermediate
+FROM mudphudwang/pytorch-jupyter:bionic-pytorch1.0-cuda10.0-v1 as intermediate
 
 ARG ssh_prv_key
 ARG ssh_pub_key
@@ -23,6 +23,6 @@ RUN git clone git@github.com:atlab/attorch.git -b pytorch0.4.0 --single-branch
 
 # Final Container (without priavte SSH keys) with installed python packages
 
-FROM mudphudwang/pytorch-jupyter:bionic-pytorch1.0-cuda10.0-v0
+FROM mudphudwang/pytorch-jupyter:bionic-pytorch1.0-cuda10.0-v1
 COPY --from=intermediate /src/attorch /src/attorch
 RUN pip install -e /src/attorch
