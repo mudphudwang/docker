@@ -192,7 +192,7 @@ class Deploy():
                 if script is None:
                     args = '-p 444{}:8888'.format(gpu_ids[0])
                     name = name.format(script='notebook')
-                    run('(docker images | grep {name}) && docker rm {name}'.format(name=name),
+                    run('$(docker images | grep {name}) && docker rm {name}'.format(name=name),
                         warn_only=True)
                     run('{} {} --name {} {}'.format(gpu_run_str, args, name, service))
                 else:
