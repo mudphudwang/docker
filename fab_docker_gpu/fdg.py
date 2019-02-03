@@ -190,16 +190,16 @@ class Deploy():
                 gpu_run_str = bare_run_str + args
 
                 if script is None:
-                    args = '-p 444{}:8888'.format(gpu_ids[0])
-                    args += ' -v {}:/testing/scripts'.format(join(self.userdir, 'scripts'))
                     name = name.format(script='notebook')
-                    run('(docker ps -a | grep {name}) && docker rm {name}'.format(name=name),
-                        warn_only=True)
-                    run('{} {} --name {} {}'.format(gpu_run_str, args, name, service))
+                    args = '-p 444{}:8888'.format(gpu_ids[0])
                 else:
                     name = name.format(script=script)
-                    # args += ' -v {}:/testing/scripts'.format(join(self.userdir, 'scripts'))
-                    pass
+                    args = ' -v {}:/testing/scripts'.format(join(self.userdir, 'scripts'))
+                    args += ' --entrypoint python3 {}.py'.format(script)
+                
+                run('(docker ps -a | grep {name}) && docker rm {name}'.format(name=name),
+                    warn_only=True)
+                run('{} {} --name {} {}'.format(gpu_run_str, args, name, service))
 
                 gpu_i = gpu_j
                 container_i += 1
