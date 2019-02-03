@@ -200,5 +200,5 @@ class Deploy():
     def testing(self):
         self.initialize()
         with cd(join(self.basedir, 'docker', 'users', self.user)):
-            run('docker-compose build --build-arg ssh_prv_key="$(cat ~/.ssh/id_rsa)" --build-arg ssh_pub_key="$(cat ~/.ssh/id_rsa.pub)"')
+            run('docker-compose build --no-cache --build-arg ssh_prv_key="$(cat ~/.ssh/id_rsa)" --build-arg ssh_pub_key="$(cat ~/.ssh/id_rsa.pub)"')
         print(self.user)
