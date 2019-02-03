@@ -195,10 +195,10 @@ class Deploy():
                 run('git clone git@github.com:{}/docker.git -b {} --single-branch'.format(
                     self.repo_fork, self.repo_branch))
         if self.env_path is not None:
-            local('scp ' + self.env_path + ' ' + env.host_string + ':' + self.userdir)
+            local('scp ' + self.env_path + ' ' + env.host_string + ':' + self.basedir)
 
     def testing(self):
         self.initialize()
-        with cd(join(self.basedir, 'docker', 'users', self.user)):
+        with cd(self.userdir):
             run('docker-compose build --no-cache --build-arg ssh_prv_key="$(cat ~/.ssh/id_rsa)" --build-arg ssh_pub_key="$(cat ~/.ssh/id_rsa.pub)"')
         print(self.user)
