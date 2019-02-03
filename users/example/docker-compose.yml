@@ -1,0 +1,10 @@
+version: '3'
+services:
+  atlab:
+    env_file: /home/${USER}/deploy/.env
+  volumes:
+    - /home/notebooks/:/notebooks/
+    - /tmp/:/tmp/
+    - /etc/localtime:/etc/localtime:ro
+  ipc: host # needed for multiprocessing (dataloader) in pytorch
+  entrypoint: "/scripts/run_jupyter.sh --NotebookApp.token=${JUPYTER_TOKEN}"

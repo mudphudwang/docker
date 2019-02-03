@@ -5,12 +5,13 @@ from distutils.util import strtobool
 from fabric.api import local, abort, run, sudo
 from fabric.context_managers import cd, settings, hide, shell_env, lcd
 import re
-from os.path import join
+from os.path import join, realpath, dirname, basename, abspath
 from getpass import getpass
 from fabric.contrib.files import exists
 from fabric.operations import put
 from fabric.utils import puts
 import numpy as np
+import inspect
 
 device_re = r'/dev/nvidia(?P<device>\d+)'
 
@@ -172,23 +173,31 @@ def logs(pattern, wildcard='*'):
 
 class Deploy():
 
-    def __init__(self, repo_fork='atlab', repo_branch='master'):
+    def __init__(self, repo_fork='atlab', repo_branch='master', env_path=None):
         self.basedir = join('/home', env.user, 'deploy')
         self.repo_fork = repo_fork
         self.repo_branch = repo_branch
-
-        # x = 'git clone git@github.com:{}/docker.git -b {}'.format(repo_fork, repo_branch)
+        self.user = basename(dirname(abspath((inspect.stack()[1])[1])))
+        self.env_path = env_path
     
-    def clone_deploy_repo(self):
+    def initialize(self):
         if exists(join(self.basedir, 'docker')):
             with cd(join(self.basedir, 'docker')):
-                run('git reset --hard')
-                run('git clean -fd')
                 run('git remote set-url origin https://github.com/{}/docker.git'.format(self.repo_fork))
                 run('git pull origin {}'.format(self.repo_branch))
-            print('here')
+                run('git checkout {}'.format(self.repo_branch))
+                run('git reset --hard origin/{}'.format(self.repo_branch))
+                run('git clean -fd')  
         else:
             run('mkdir -p {}'.format(self.basedir))
             with cd(self.basedir):
                 run('git clone git@github.com:{}/docker.git -b {} --single-branch'.format(
                     self.repo_fork, self.repo_branch))
+        if self.env_path is not None:
+            local('scp ' + self.env_path + ' ' + env.host_string + ':' + self.basedir)
+
+    def testing(self):
+        self.initialize()
+        with cd(join(self.basedir, 'users', self.user)):
+            run('docker-compose build --build-arg ssh_prv_key="$(cat ~/.ssh/id_rsa)" --build-arg ssh_pub_key="$(cat ~/.ssh/id_rsa.pub)"')
+        print(self.user)
