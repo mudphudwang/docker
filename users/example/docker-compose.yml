@@ -3,6 +3,8 @@ services:
   atlab:
     build:
       context: .
+    env_file:
+      - .env
     volumes:
       - /home/notebooks/:/notebooks/
       - /tmp/:/tmp/
