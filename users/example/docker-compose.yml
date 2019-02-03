@@ -10,4 +10,4 @@ services:
       - /etc/localtime:/etc/localtime:ro
     ipc: host # needed for multiprocessing (dataloader) in pytorch
     command: "start-notebook.sh \
-      --NotebookApp.token=${ACCESS_TOKEN}
+      --NotebookApp.token=${ACCESS_TOKEN}"
