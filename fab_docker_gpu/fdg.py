@@ -173,8 +173,8 @@ class Deploy():
 
         self.initialize()
         with cd(self.userdir):
-            run('docker-compose build --no-cache --build-arg ssh_prv_key="$(cat ~/.ssh/id_rsa)" --build-arg ssh_pub_key="$(cat ~/.ssh/id_rsa.pub)" {}'.format(service))
-            bare_run_str = 'docker-compose run -d'
+            # run('docker-compose build --no-cache --build-arg ssh_prv_key="$(cat ~/.ssh/id_rsa)" --build-arg ssh_pub_key="$(cat ~/.ssh/id_rsa.pub)" {}'.format(service))
+            # bare_run_str = 'docker-compose run -d'
 
             gpu_i = 0
             container_i = 0
@@ -192,7 +192,9 @@ class Deploy():
                 if script is None:
                     args = '-p 444{}:8888'.format(gpu_ids[0])
                     name = name.format(script='notebook')
-                    run('docker images | grep {name} && docker rm {name}'.format(name=name))
+                    container_exists = run('docker images | grep {name})')
+                    print(container_exists)
+                    print(type(container_exists))
                     run(gpu_run_str + args + ' --name ' + name + service)
                 else:
                     # args += ' -v {}:/testing/scripts'.format(join(self.userdir, 'scripts'))
