@@ -1,6 +1,6 @@
 # Intermediate Container for private github repositories
 
-FROM mudphudwang/pytorch-jupyter:v1.0-cuda10.0
+FROM mudphudwang/pytorch-jupyter:bionic-pytorch1.0-cuda10.0-v0 as intermediate
 
 ARG ssh_prv_key
 ARG ssh_pub_key
@@ -18,4 +18,11 @@ RUN echo "$ssh_prv_key" > /root/.ssh/id_rsa && \
 
 # Clone Repositories
 WORKDIR /src
-RUN git clone git@github.com:cajal/network-search.git
+RUN git clone git@github.com:atlab/attorch.git -b pytorch0.4.0 --single-branch
+
+
+# Final Container without priavte SSH keys
+
+FROM mudphudwang/pytorch-jupyter:bionic-pytorch1.0-cuda10.0-v0
+COPY --from=intermediate /src/attorch /src/attorch
+RUN pip install -e /src/attorch

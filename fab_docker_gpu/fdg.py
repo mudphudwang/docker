@@ -7,6 +7,7 @@ from fabric.context_managers import cd, settings, hide, shell_env, lcd
 import re
 from os.path import join
 from getpass import getpass
+from fabric.contrib.files import exists
 from fabric.operations import put
 from fabric.utils import puts
 import numpy as np
@@ -106,9 +107,6 @@ def test(n_gpus=1, n_containers=10):
         container_i += 1
     print(env.host_string)
 
-def test_build():
-    run('docker build -t test /home/ewang/nas-project/code/docker/Dockerfiles --build-arg ssh_prv_key="$(cat ~/.ssh/id_rsa)" --build-arg ssh_pub_key="$(cat ~/.ssh/id_rsa.pub)"')
-
 def deploy(yml_file, service, n=None, rebuild=False):
     project_dir = join(env.basedir, 'network-search-8')
     gpus = free_gpu_slots()
@@ -170,3 +168,27 @@ def logs(pattern, wildcard='*'):
     candidates = [candidates[s] for s in selection]
     for candidate in candidates:
         run('docker logs {} | egrep "{}"'.format(candidate, pattern))
+
+
+class Deploy():
+
+    def __init__(self, repo_fork='atlab', repo_branch='master'):
+        self.basedir = join('/home', env.user, 'deploy')
+        self.repo_fork = repo_fork
+        self.repo_branch = repo_branch
+
+        # x = 'git clone git@github.com:{}/docker.git -b {}'.format(repo_fork, repo_branch)
+    
+    def clone_deploy_repo(self):
+        if exists(join(self.basedir, 'docker')):
+            with cd(join(self.basedir, 'docker')):
+                run('git reset --hard')
+                run('git clean -fd')
+                run('git remote set-url origin https://github.com/{}/docker.git'.format(self.repo_fork))
+                run('git pull origin {}'.format(self.repo_branch))
+            print('here')
+        else:
+            run('mkdir -p {}'.format(self.basedir))
+            with cd(self.basedir):
+                run('git clone git@github.com:{}/docker.git -b {} --single-branch'.format(
+                    self.repo_fork, self.repo_branch))

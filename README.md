@@ -5,6 +5,6 @@ To Install:
 
     sudo apt-get install fabric=1.14.0-1
 
-    git clone 
+    git clone git@github.com:atlab/docker.git
 
-    pip2 install -e .
+    pip install .
