@@ -9,4 +9,5 @@ services:
       - /tmp/:/tmp/
       - /etc/localtime:/etc/localtime:ro
     ipc: host # needed for multiprocessing (dataloader) in pytorch
-    command: ["/scripts/run_jupyter.sh", "--NotebookApp.token=${JUP_TOK}"]
+    command: "start-notebook.sh \
+        --NotebookApp.token=${ACCESS_TOKEN}
