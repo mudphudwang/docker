@@ -174,7 +174,7 @@ class Deploy():
         self.initialize()
         with cd(self.userdir):
             # run('docker-compose build --no-cache --build-arg ssh_prv_key="$(cat ~/.ssh/id_rsa)" --build-arg ssh_pub_key="$(cat ~/.ssh/id_rsa.pub)" {}'.format(service))
-            # bare_run_str = 'docker-compose run -d'
+            bare_run_str = 'docker-compose run -d'
 
             gpu_i = 0
             container_i = 0
