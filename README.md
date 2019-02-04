@@ -9,6 +9,8 @@ To Install:
 
     git clone git@github.com:atlab/docker.git
 
+    cd docker
+
     pip install .
 
 `/users/example/` is a template for creating a Dockerfile, docker-compose, and fabfile.  To use, navigate to the user directory:
