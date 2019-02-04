@@ -3,10 +3,12 @@ version: '3'
 services:
 
   nsearch7:
-    build: .
+    build:
+      context: .
+      args:
+        - nsearch_branch=7.0
     env_file: /home/${USER}/deploy/.env
-    args:
-      - nsearch_branch=7.0
+    
     volumes:
       - /tmp/:/tmp/
       - /etc/localtime:/etc/localtime:ro
@@ -15,10 +17,11 @@ services:
     ipc: host # needed for multiprocessing (dataloader) in pytorch
 
   nsearch8:
-    build: .
+    build:
+      context: .
+      args:
+        - nsearch_branch=8.0
     env_file: /home/${USER}/deploy/.env
-    args:
-      - nsearch_branch=8.0
     volumes:
       - /tmp/:/tmp/
       - /etc/localtime:/etc/localtime:ro
@@ -27,10 +30,11 @@ services:
     ipc: host # needed for multiprocessing (dataloader) in pytorch
 
   nsearch8dev:
-    build: .
+    build:
+      context: .
+      args:
+        - nsearch_branch=8.0
     env_file: /home/${USER}/deploy/.env
-    args:
-      - nsearch_branch=8.0
     volumes:
       - /tmp/:/tmp/
       - /etc/localtime:/etc/localtime:ro
