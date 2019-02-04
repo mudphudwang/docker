@@ -14,6 +14,12 @@ def deploy_nsearch7(script=None, n=10, gpus=1, token=None):
 def stop_nsearch7(script=None):
     d.stop('nsearch7', script)
 
+def deploy_nsearch7mp(script=None, n=10, gpus=1, token=None):
+    d.deploy('nsearch7mp', script, n, gpus, token)
+
+def stop_nsearch7mp(script=None):
+    d.stop('nsearch7mp', script)
+
 def deploy_nsearch8(script=None, n=10, gpus=1, token=None):
     d.deploy('nsearch8', script, n, gpus, token)
 
