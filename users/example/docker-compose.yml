@@ -1,9 +1,0 @@
-version: '3'
-services:
-  atlab:
-    build: .
-    env_file: /home/${USER}/deploy/.env
-    volumes:
-      - /tmp/:/tmp/
-      - /etc/localtime:/etc/localtime:ro
-    ipc: host # needed for multiprocessing (dataloader) in pytorch
