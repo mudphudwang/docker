@@ -206,7 +206,6 @@ class Deploy():
 
                 gpu_i = gpu_j
                 container_i += 1
-
                 gpu_groups.append(','.join(gpu_ids))
 
         remove_old_images()
