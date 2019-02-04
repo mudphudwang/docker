@@ -14,7 +14,7 @@ services:
       - /mnt/scratch07:/external
       - /home/ewang/nas-project/notebooks/:/notebooks/
     ipc: host # needed for multiprocessing (dataloader) in pytorch
-    working_dir: /notebooks
+    working_dir: /
 
   nsearch7mp:
     build:
