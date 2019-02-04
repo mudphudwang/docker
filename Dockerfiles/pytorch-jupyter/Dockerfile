@@ -24,7 +24,8 @@ RUN apt-get update && \
         openssh-server \
         ffmpeg \
         libhdf5-dev \
-        libsm6 
+        libsm6 \
+        graphviz
 
 RUN pip install imageio ffmpy h5py opencv-python statsmodels graphviz tqdm gitpython \
         python-twitter scikit-image atflow
