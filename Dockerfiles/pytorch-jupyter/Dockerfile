@@ -1,4 +1,4 @@
-# bionic-pytorch1.0-cuda10.0-v1
+# bionic-pytorch1.0-cuda10.0-v2
 
 FROM mudphudwang/pytorch:bionic-pytorch1.0-cuda10.0
 
@@ -23,7 +23,8 @@ RUN apt-get update && \
     apt-get install -y \
         openssh-server \
         ffmpeg \
-        libhdf5-dev
+        libhdf5-dev \
+        libsm6 
 
 RUN pip install imageio ffmpy h5py opencv-python statsmodels graphviz tqdm gitpython \
         python-twitter scikit-image atflow
