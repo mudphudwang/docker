@@ -26,9 +26,9 @@ services:
       - /tmp/:/tmp/
       - /etc/localtime:/etc/localtime:ro
       - /mnt/scratch07:/external
-      - /mnt/lab/users/zhe/:/zhe/
+      - /mnt/lab/users/zheli/:/zheli/
     ipc: host # needed for multiprocessing (dataloader) in pytorch
-    working_dir: /zhe
+    working_dir: /zheli
 
   nsearch8:
     build:
