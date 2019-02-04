@@ -8,13 +8,13 @@ services:
       args:
         - nsearch_branch=7.0
     env_file: /home/${USER}/deploy/.env
-    
     volumes:
       - /tmp/:/tmp/
       - /etc/localtime:/etc/localtime:ro
       - /mnt/scratch07:/external
       - /home/ewang/nas-project/notebooks/:/notebooks/
     ipc: host # needed for multiprocessing (dataloader) in pytorch
+    working_dir: /notebooks
 
   nsearch8:
     build:
@@ -28,6 +28,7 @@ services:
       - /mnt/scratch07:/external
       - /home/ewang/nas-project/notebooks/:/notebooks/
     ipc: host # needed for multiprocessing (dataloader) in pytorch
+    working_dir: /notebooks
 
   nsearch8dev:
     build:
@@ -44,3 +45,4 @@ services:
       - /home/ewang/nas-project/code/neuro_data:/src/neuro_data/
       - /home/ewang/nas-project/code/network-search-8/:/src/network-search-8/
     ipc: host # needed for multiprocessing (dataloader) in pytorch
+    working_dir: /notebooks
