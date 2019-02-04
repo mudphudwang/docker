@@ -1,0 +1,42 @@
+version: '3'
+
+services:
+
+  nsearch7:
+    build: .
+    env_file: /home/${USER}/deploy/.env
+    args:
+      - nsearch_branch=7.0
+    volumes:
+      - /tmp/:/tmp/
+      - /etc/localtime:/etc/localtime:ro
+      - /mnt/scratch07:/external
+      - /home/ewang/nas-project/notebooks/:/notebooks/
+    ipc: host # needed for multiprocessing (dataloader) in pytorch
+
+  nsearch8:
+    build: .
+    env_file: /home/${USER}/deploy/.env
+    args:
+      - nsearch_branch=8.0
+    volumes:
+      - /tmp/:/tmp/
+      - /etc/localtime:/etc/localtime:ro
+      - /mnt/scratch07:/external
+      - /home/ewang/nas-project/notebooks/:/notebooks/
+    ipc: host # needed for multiprocessing (dataloader) in pytorch
+
+  nsearch8dev:
+    build: .
+    env_file: /home/${USER}/deploy/.env
+    args:
+      - nsearch_branch=8.0
+    volumes:
+      - /tmp/:/tmp/
+      - /etc/localtime:/etc/localtime:ro
+      - /mnt/scratch07:/external
+      - /home/ewang/nas-project/notebooks/:/notebooks/
+      - /home/ewang/nas-project/code/attorch:/src/attorch/
+      - /home/ewang/nas-project/code/neuro_data:/src/neuro_data/
+      - /home/ewang/nas-project/code/network-search-8/:/src/network-search-8/
+    ipc: host # needed for multiprocessing (dataloader) in pytorch
