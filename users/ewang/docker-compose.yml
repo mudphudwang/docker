@@ -16,6 +16,20 @@ services:
     ipc: host # needed for multiprocessing (dataloader) in pytorch
     working_dir: /notebooks
 
+  nsearch7mp:
+    build:
+      context: .
+      args:
+        - nsearch_branch=7.0
+    env_file: /home/${USER}/deploy/.env
+    volumes:
+      - /tmp/:/tmp/
+      - /etc/localtime:/etc/localtime:ro
+      - /mnt/scratch07:/external
+      - /mnt/lab/users/zhe/:/zhe/
+    ipc: host # needed for multiprocessing (dataloader) in pytorch
+    working_dir: /zhe
+
   nsearch8:
     build:
       context: .
