@@ -1,4 +1,4 @@
-# bionic-pytorch1.0-cuda10.0-v3
+# bionic-pytorch1.0-cuda10.0-v4
 
 FROM mudphudwang/pytorch:bionic-pytorch1.0-cuda10.0
 
