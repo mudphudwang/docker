@@ -1,4 +1,4 @@
-# bionic-pytorch1.0-cuda10.0
+# bionic-pytorch1.1-cuda10.0
 
 FROM nvidia/cuda:10.0-cudnn7-devel-ubuntu18.04
 ARG PYTHON_VERSION=3.6

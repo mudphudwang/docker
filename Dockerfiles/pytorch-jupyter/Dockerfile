@@ -1,6 +1,6 @@
-# bionic-pytorch1.0-cuda10.0-v4
+# bionic-pytorch1.1-cuda10.0-v0
 
-FROM mudphudwang/pytorch:bionic-pytorch1.0-cuda10.0
+FROM mudphudwang/pytorch:bionic-pytorch1.1-cuda10.0
 
 RUN /opt/conda/bin/conda install -y -c conda-forge jupyterlab=0.35.4 && \
      /opt/conda/bin/conda clean -ya
@@ -25,7 +25,8 @@ RUN apt-get update && \
         ffmpeg \
         libhdf5-dev \
         libsm6 \
-        graphviz
+        graphviz \
+        fish
 
 RUN pip install imageio ffmpy h5py opencv-python statsmodels graphviz tqdm gitpython \
         python-twitter scikit-image atflow seaborn
