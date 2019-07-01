@@ -28,9 +28,7 @@ RUN apt-get update && \
         graphviz \
         fish
 
-RUN /opt/conda/bin/conda install -y -c conda-forge av pims && \
-    /opt/conda/bin/conda clean -ya
-
 RUN pip install imageio ffmpy h5py opencv-python statsmodels graphviz tqdm gitpython \
-        python-twitter scikit-image scikit-video atflow seaborn scenedetect
+        python-twitter scikit-image scikit-video atflow seaborn
+RUN pip install scenedetect==0.5
 RUN pip install datajoint==0.11.1
