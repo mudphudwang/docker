@@ -22,6 +22,7 @@ ENTRYPOINT ["/scripts/run_jupyter.sh"]
 RUN apt-get update && \
     apt-get install -y \
         unzip \
+        rsync \
         openssh-server \
         ffmpeg \
         libhdf5-dev \
