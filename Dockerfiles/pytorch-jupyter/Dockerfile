@@ -30,7 +30,7 @@ RUN apt-get update && \
         graphviz \
         fish
 
-RUN pip install imageio ffmpy h5py opencv-python statsmodels graphviz tqdm gitpython \
-        python-twitter scikit-image scikit-video atflow seaborn
-RUN pip install scenedetect==0.5
-RUN pip install datajoint==0.11.1
+RUN pip install h5py statsmodels graphviz tqdm gitpython seaborn
+RUN pip install --upgrade scenedetect==0.5
+RUN pip install --upgrade pillow==6.1.0
+RUN pip install --upgrade datajoint==0.11.1
