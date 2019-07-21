@@ -33,4 +33,5 @@ RUN apt-get update && \
 RUN pip install h5py statsmodels graphviz tqdm gitpython seaborn
 RUN pip install scikit-video==1.1.11
 RUN pip install pillow==6.1.0
+RUN pip install pyparsing==2.0.3
 RUN pip install datajoint==0.11.1
