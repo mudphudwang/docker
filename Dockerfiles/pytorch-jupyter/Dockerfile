@@ -31,6 +31,6 @@ RUN apt-get update && \
         fish
 
 RUN pip install h5py statsmodels graphviz tqdm gitpython seaborn
-RUN pip install --upgrade scenedetect==0.5
+RUN pip install --upgrade scikit-video==1.1.11
 RUN pip install --upgrade pillow==6.1.0
-RUN pip install --upgrade datajoint==0.11.1
+RUN pip install --upgrade datajoint==0.11.2
