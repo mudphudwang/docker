@@ -1,4 +1,4 @@
-# bionic-python3.7-cuda10.0
+# mudphudwang/python:bionic-python3.7-cuda10.0
 
 FROM nvidia/cuda:10.0-cudnn7-devel-ubuntu18.04
 ARG PYTHON_VERSION=3.7
@@ -26,10 +26,12 @@ RUN curl -o ~/miniconda.sh -O  https://repo.continuum.io/miniconda/Miniconda3-la
      ~/miniconda.sh -b -p /opt/conda && \
      rm ~/miniconda.sh && \
      /opt/conda/bin/conda install -y python=$PYTHON_VERSION numpy pyyaml scipy ipython \
-     h5py graphviz seaborn mkl mkl-include cython typing && \
+     h5py seaborn mkl mkl-include cython typing && \
      /opt/conda/bin/conda install -y -c conda-forge tqdm statsmodels && \
      /opt/conda/bin/conda clean -ya
 ENV PATH /opt/conda/bin:$PATH
+
+RUN pip install graphviz
 
 WORKDIR /workspace
 RUN chmod -R a+w /workspace
