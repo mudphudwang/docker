@@ -17,8 +17,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libhdf5-dev \
     libsm6 \
     graphviz \
-    fish \
-    ffmpeg=7:3.4.6-0ubuntu0.18.04.1 && \
+    fish && \
     rm -rf /var/lib/apt/lists/*
 
 RUN curl -o ~/miniconda.sh -O  https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh  && \
