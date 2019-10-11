@@ -3,7 +3,7 @@
 FROM mudphudwang/base
 
 RUN /opt/conda/bin/conda install -y -c conda-forge av=6.2.0 && \
-    /opt/conda/bin/conda install -y -c pytorch pytorch=1.2.0 torchvision=0.4 cudatoolkit=10.0 && \
+    /opt/conda/bin/conda install -y -c pytorch pytorch=1.3.0 torchvision=0.4.1 cudatoolkit=10.0 && \
     /opt/conda/bin/conda clean -ya
 
 RUN pip install --extra-index-url https://developer.download.nvidia.com/compute/redist/cuda/10.0 \
