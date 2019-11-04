@@ -14,6 +14,7 @@ RUN pip install --extra-index-url https://developer.download.nvidia.com/compute/
     pandas==0.25.1 \
     h5py==2.10.0 \
     gitpython==3.0.3 \
+    opencv-python==4.1.1.26 \
     scikit-image==0.15.0 \
     scikit-video==1.1.11 \
     graphviz==0.13 \
