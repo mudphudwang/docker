@@ -27,4 +27,4 @@ RUN pip install --extra-index-url https://developer.download.nvidia.com/compute/
     datajoint==0.11.3
 
 RUN pip uninstall -y pillow && \
-    pip install pillow-simd==6.0.0.post0
+    pip install pillow-simd==7.0.0.post2
