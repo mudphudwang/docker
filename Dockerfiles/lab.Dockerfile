@@ -25,7 +25,7 @@ RUN pip install --extra-index-url https://developer.download.nvidia.com/compute/
     scikit-image==0.15.0 \
     scikit-video==1.1.11 \
     graphviz==0.13 \
-    datajoint==0.11.3
+    datajoint==0.12.4
 
 RUN pip uninstall -y pillow && \
     pip install pillow-simd==7.0.0.post2
