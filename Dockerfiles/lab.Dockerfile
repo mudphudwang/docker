@@ -16,11 +16,11 @@ RUN pip install --extra-index-url https://developer.download.nvidia.com/compute/
     nvidia-dali==0.18.0 \
     scipy==1.3.1 \
     matplotlib==3.1.1 \
-    seaborn==0.9.0 \
-    pandas==0.25.1 \
+    seaborn==0.10.0 \
+    pandas==1.0.1 \
     statsmodels==0.11.0 \
     h5py==2.10.0 \
-    gitpython==3.0.3 \
+    gitpython==3.0.8 \
     opencv-python==4.1.1.26 \
     scikit-image==0.15.0 \
     scikit-video==1.1.11 \
