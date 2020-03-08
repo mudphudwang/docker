@@ -18,6 +18,7 @@ RUN pip install --extra-index-url https://developer.download.nvidia.com/compute/
     matplotlib==3.1.1 \
     seaborn==0.10.0 \
     pandas==1.0.1 \
+    xlrd==1.2.0 \
     statsmodels==0.11.0 \
     h5py==2.10.0 \
     gitpython==3.0.8 \
@@ -25,6 +26,7 @@ RUN pip install --extra-index-url https://developer.download.nvidia.com/compute/
     scikit-image==0.15.0 \
     scikit-video==1.1.11 \
     graphviz==0.13 \
+    wget==3.2 \
     datajoint==0.12.4
 
 RUN pip uninstall -y pillow && \
