@@ -26,7 +26,7 @@ RUN pip install \
     matplotlib==3.2.2 \
     seaborn==0.10.1 \
     pandas==1.0.5 \
-    xlrd==1.2.6 \
+    xlrd==1.2.0 \
     statsmodels==0.11.1 \
     h5py==2.10.0 \
     gitpython==3.1.3 \
