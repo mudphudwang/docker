@@ -10,9 +10,6 @@ RUN pip install \
     imageio==2.9.0 \
     imageio-ffmpeg==0.4.2 \
     opencv-python==4.3.0.36 \
-    scikit-image==0.17.2 \
-    scikit-video==1.1.11 \
-    scikit-learn==0.23.1 \
     h5py==2.10.0 \
     numpy==1.19.1 \
     scipy==1.5.2 \
@@ -20,10 +17,15 @@ RUN pip install \
     matplotlib==3.3.0 \
     seaborn==0.10.1 \
     statsmodels==0.11.1 \
+    scikit-image==0.17.2 \
+    scikit-video==1.1.11 \
+    scikit-learn==0.23.1 \
+    umap-learn==0.4.6 \
+    hdbscan==0.8.26 \
     datajoint==0.12.6 \
     jupyterlab==2.2.0 \
-    torch==1.5.1 \
-    torchvision==0.6.1
+    torch==1.6.0 \
+    torchvision==0.7.0
 
 EXPOSE 8888
 ADD ./add/jupyter_notebook_config.py /root/.jupyter/
