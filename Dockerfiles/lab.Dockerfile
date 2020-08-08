@@ -22,6 +22,7 @@ RUN pip install \
     scikit-learn==0.23.1 \
     umap-learn==0.4.6 \
     hdbscan==0.8.26 \
+    networkx==2.4 \
     datajoint==0.12.6 \
     jupyterlab==2.2.0 \
     torch==1.6.0 \
