@@ -24,7 +24,7 @@ RUN curl -v -o ~/miniconda.sh -O  https://repo.anaconda.com/miniconda/Miniconda3
     chmod +x ~/miniconda.sh && \
     ~/miniconda.sh -b -p /opt/conda && \
     rm ~/miniconda.sh && \
-    /opt/conda/bin/conda install -y -c conda-forge python=$PYTHON_VERSION av=8.0.2 && \
+    /opt/conda/bin/conda install -y -c conda-forge python=$PYTHON_VERSION opencv=4.4.0 av=8.0.2  && \
     /opt/conda/bin/conda clean -ya
 ENV PATH /opt/conda/bin:$PATH
 
