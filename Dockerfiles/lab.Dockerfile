@@ -4,27 +4,27 @@ FROM mudphudwang/base
 
 RUN pip install \
     gitpython==3.1.7 \
-    graphviz==0.14 \
+    graphviz==0.14.1 \
     wget==3.2 \
     xlrd==1.2.0 \
     imageio==2.9.0 \
     imageio-ffmpeg==0.4.2 \
-    opencv-python==4.3.0.36 \
+    opencv-python==4.4.0.42 \
     h5py==2.10.0 \
-    numpy==1.19.1 \
+    numpy==1.19.2 \
     scipy==1.5.2 \
-    pandas==1.0.5 \
-    matplotlib==3.3.0 \
-    seaborn==0.10.1 \
-    statsmodels==0.11.1 \
+    pandas==1.1.2 \
+    matplotlib==3.3.2 \
+    seaborn==0.11.0 \
+    statsmodels==0.12.0 \
     scikit-image==0.17.2 \
     scikit-video==1.1.11 \
-    scikit-learn==0.23.1 \
+    scikit-learn==0.23.2 \
     umap-learn==0.4.6 \
     hdbscan==0.8.26 \
-    networkx==2.4 \
+    networkx==2.5 \
     datajoint==0.12.6 \
-    jupyterlab==2.2.0 \
+    jupyterlab==2.2.8 \
     torch==1.6.0 \
     torchvision==0.7.0
 
