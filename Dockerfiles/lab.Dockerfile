@@ -3,30 +3,30 @@
 FROM mudphudwang/base
 
 RUN pip install \
-    gitpython==3.1.7 \
-    graphviz==0.14.1 \
+    gitpython==3.1.11 \
+    graphviz==0.14.2 \
     wget==3.2 \
     xlrd==1.2.0 \
     imageio==2.9.0 \
     imageio-ffmpeg==0.4.2 \
-    opencv-python==4.4.0.42 \
-    h5py==2.10.0 \
-    numpy==1.19.2 \
-    scipy==1.5.2 \
-    pandas==1.1.2 \
+    opencv-python==4.4.0.44 \
+    h5py==3.0.0 \
+    numpy==1.19.3 \
+    scipy==1.5.3 \
+    pandas==1.1.4 \
     matplotlib==3.3.2 \
     seaborn==0.11.0 \
-    statsmodels==0.12.0 \
+    statsmodels==0.12.1 \
     scikit-image==0.17.2 \
     scikit-video==1.1.11 \
     scikit-learn==0.23.2 \
     umap-learn==0.4.6 \
     hdbscan==0.8.26 \
     networkx==2.5 \
-    datajoint==0.12.6 \
-    jupyterlab==2.2.8 \
-    torch==1.6.0 \
-    torchvision==0.7.0
+    datajoint==0.12.7 \
+    jupyterlab==2.2.9 \
+    torch==1.7.0 \
+    torchvision==0.8.1
 
 EXPOSE 8888
 ADD ./add/jupyter_notebook_config.py /root/.jupyter/
