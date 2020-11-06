@@ -24,9 +24,12 @@ RUN pip install \
     hdbscan==0.8.26 \
     networkx==2.5 \
     datajoint==0.12.7 \
-    jupyterlab==2.2.9 \
-    torch==1.7.0 \
-    torchvision==0.8.1
+    jupyterlab==2.2.9
+
+RUN pip install \
+    torch==1.7.0+cu110 \
+    torchvision==0.8.1+cu110 \
+    -f https://download.pytorch.org/whl/torch_stable.html
 
 EXPOSE 8888
 ADD ./add/jupyter_notebook_config.py /root/.jupyter/
