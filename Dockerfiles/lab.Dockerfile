@@ -10,8 +10,9 @@ RUN pip install \
     imageio==2.9.0 \
     imageio-ffmpeg==0.4.2 \
     opencv-python==4.4.0.44 \
+    Pillow=8.0.1 \
     h5py==3.0.0 \
-    numpy==1.19.3 \
+    numpy==1.19.4 \
     scipy==1.5.3 \
     pandas==1.1.4 \
     matplotlib==3.3.2 \
