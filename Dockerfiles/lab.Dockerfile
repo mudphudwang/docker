@@ -4,18 +4,18 @@ FROM mudphudwang/base
 
 RUN pip install \
     gitpython==3.1.11 \
-    graphviz==0.14.2 \
+    graphviz==0.15 \
     wget==3.2 \
     xlrd==1.2.0 \
     imageio==2.9.0 \
     imageio-ffmpeg==0.4.2 \
-    opencv-python==4.4.0.44 \
+    opencv-python==4.4.0.46 \
     Pillow==8.0.1 \
-    h5py==3.0.0 \
+    h5py==3.1.0 \
     numpy==1.19.4 \
-    scipy==1.5.3 \
+    scipy==1.5.4 \
     pandas==1.1.4 \
-    matplotlib==3.3.2 \
+    matplotlib==3.3.3 \
     seaborn==0.11.0 \
     statsmodels==0.12.1 \
     scikit-image==0.17.2 \
@@ -31,6 +31,8 @@ RUN pip install \
     torch==1.7.0+cu110 \
     torchvision==0.8.1+cu110 \
     -f https://download.pytorch.org/whl/torch_stable.html
+
+RUN pip cache purge
 
 EXPOSE 8888
 ADD ./add/jupyter_notebook_config.py /root/.jupyter/
