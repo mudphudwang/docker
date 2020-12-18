@@ -28,8 +28,8 @@ RUN pip install \
     jupyterlab==2.2.9
 
 RUN pip install \
-    torch==1.7.0+cu110 \
-    torchvision==0.8.1+cu110 \
+    torch==1.7.1+cu110 \
+    torchvision==0.8.2+cu110 \
     -f https://download.pytorch.org/whl/torch_stable.html
 
 RUN pip cache purge
