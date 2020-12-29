@@ -35,7 +35,7 @@ RUN pip install \
 RUN pip cache purge
 
 EXPOSE 8888
-ADD ./add/jupyter_notebook_config.py /root/.jupyter/
+ADD ./add/jupyter_lab_config.py /root/.jupyter/
 
 # Hack to deal with weird bug that prevents running `jupyter notebook` directly
 # from Docker ENTRYPOINT or CMD.
