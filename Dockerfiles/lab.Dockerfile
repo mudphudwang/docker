@@ -14,18 +14,18 @@ RUN pip install \
     h5py==3.1.0 \
     numpy==1.19.4 \
     scipy==1.5.4 \
-    pandas==1.1.4 \
+    pandas==1.2.0 \
     matplotlib==3.3.3 \
-    seaborn==0.11.0 \
+    seaborn==0.11.1 \
     statsmodels==0.12.1 \
-    scikit-image==0.17.2 \
+    scikit-image==0.18.1 \
     scikit-video==1.1.11 \
-    scikit-learn==0.23.2 \
+    scikit-learn==0.24.0 \
     umap-learn==0.4.6 \
     hdbscan==0.8.26 \
     networkx==2.5 \
     datajoint==0.12.7 \
-    jupyterlab==2.2.9
+    jupyterlab==3.0.0
 
 RUN pip install \
     torch==1.7.1+cu110 \
