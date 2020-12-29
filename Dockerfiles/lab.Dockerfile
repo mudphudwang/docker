@@ -25,7 +25,8 @@ RUN pip install \
     hdbscan==0.8.26 \
     networkx==2.5 \
     datajoint==0.12.7 \
-    jupyterlab==3.0.0
+    jupyterlab==3.0.0 \
+    jedi==0.17.2
 
 RUN pip install \
     torch==1.7.1+cu110 \
