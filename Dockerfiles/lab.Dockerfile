@@ -10,23 +10,23 @@ RUN pip install \
     imageio==2.9.0 \
     imageio-ffmpeg==0.4.2 \
     opencv-python==4.4.0.46 \
-    Pillow==8.0.1 \
+    Pillow==8.1.0 \
     h5py==3.1.0 \
-    numpy==1.19.4 \
-    scipy==1.5.4 \
-    pandas==1.2.0 \
-    matplotlib==3.3.3 \
+    numpy==1.20.1 \
+    scipy==1.6.0 \
+    pandas==1.2.1 \
+    matplotlib==3.3.4 \
     seaborn==0.11.1 \
-    statsmodels==0.12.1 \
+    statsmodels==0.12.2 \
     scikit-image==0.18.1 \
     scikit-video==1.1.11 \
-    scikit-learn==0.24.0 \
-    umap-learn==0.4.6 \
-    hdbscan==0.8.26 \
+    scikit-learn==0.24.1 \
+    pynndescent==0.5.2 \
+    umap-learn==0.5.1 \
+    hdbscan==0.8.27 \
     networkx==2.5 \
-    datajoint==0.12.7 \
-    jupyterlab==3.0.0 \
-    jedi==0.17.2
+    datajoint==0.12.8 \
+    jupyterlab==3.0.7
 
 RUN pip install \
     torch==1.7.1+cu110 \
