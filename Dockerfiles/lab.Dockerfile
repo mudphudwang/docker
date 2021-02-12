@@ -17,21 +17,9 @@ RUN pip install \
     pandas==1.2.1 \
     matplotlib==3.3.4 \
     seaborn==0.11.1 \
-    statsmodels==0.12.2 \
-    scikit-image==0.18.1 \
-    scikit-video==1.1.11 \
-    scikit-learn==0.24.1 \
-    pynndescent==0.5.2 \
-    umap-learn==0.5.1 \
-    hdbscan==0.8.27 \
     networkx==2.5 \
     datajoint==0.12.8 \
     jupyterlab==3.0.7
-
-RUN pip install \
-    torch==1.7.1+cu110 \
-    torchvision==0.8.2+cu110 \
-    -f https://download.pytorch.org/whl/torch_stable.html
 
 RUN pip cache purge
 
