@@ -1,7 +1,6 @@
-# mudphudwang/dv_model
+# mudphudwang/dv_models
 
 FROM mudphudwang/lab
-
 
 RUN pip install \
     statsmodels==0.12.2 \
