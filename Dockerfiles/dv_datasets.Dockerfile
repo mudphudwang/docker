@@ -11,3 +11,8 @@ RUN git clone https://github.com/mudphudwang/CaImAn.git -b master --single-branc
 RUN pip install -r /src/CaImAn/requirements.txt
 RUN pip install -e /src/CaImAn/
 WORKDIR /workspace
+
+RUN pip install \
+    torch==1.7.1+cu110 \
+    torchvision==0.8.2+cu110 \
+    -f https://download.pytorch.org/whl/torch_stable.html
