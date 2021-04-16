@@ -3,23 +3,23 @@
 FROM mudphudwang/base
 
 RUN pip install \
-    gitpython==3.1.11 \
-    graphviz==0.15 \
+    gitpython==3.1.14 \
+    graphviz==0.16 \
     wget==3.2 \
     xlrd==1.2.0 \
     imageio==2.9.0 \
-    imageio-ffmpeg==0.4.2 \
-    opencv-python==4.4.0.46 \
-    Pillow==8.1.0 \
-    h5py==3.1.0 \
-    numpy==1.20.1 \
-    scipy==1.6.0 \
-    pandas==1.2.1 \
-    matplotlib==3.3.4 \
+    imageio-ffmpeg==0.4.3 \
+    opencv-python==4.5.1.48 \
+    Pillow==8.2.0 \
+    h5py==3.2.1 \
+    numpy==1.20.2 \
+    scipy==1.6.2 \
+    pandas==1.2.4 \
+    matplotlib==3.4.1 \
     seaborn==0.11.1 \
-    networkx==2.5 \
-    datajoint==0.12.8 \
-    jupyterlab==3.0.7
+    networkx==2.5.1 \
+    datajoint==0.13.1 \
+    jupyterlab==3.0.14
 
 RUN pip cache purge
 
