@@ -2,8 +2,26 @@
 
 FROM mudphudwang/base
 
-RUN /opt/conda/bin/conda install -y -c conda-forge nodejs=15.14.0 && \
+RUN /opt/conda/bin/conda install -y -c conda-forge \
+    nodejs=15.14.0 \
+    jupyterlab=3.0.14 \
+    plotly=4.14.3 \
+    dash=1.20.0 \
+    jupyter-dash=0.4.0 && \
     /opt/conda/bin/conda clean -ya
+
+EXPOSE 8888
+ADD ./add/jupyter_lab_config.py /root/.jupyter/
+RUN jupyter lab build
+
+# Hack to deal with weird bug that prevents running `jupyter notebook` directly
+# from Docker ENTRYPOINT or CMD.
+# Use dumb shell script that runs `jupyter notebook` :(
+# https://github.com/ipython/ipython/issues/7062
+RUN mkdir -p /scripts
+ADD ./add/run_jupyter.sh /scripts/
+RUN chmod -R a+x /scripts
+ENTRYPOINT ["/scripts/run_jupyter.sh"]
 
 RUN pip install \
     gitpython==3.1.14 \
@@ -30,28 +48,11 @@ RUN pip install \
     scikit-learn==0.24.1 \
     pynndescent==0.5.2 \
     umap-learn==0.5.1 \
-    hdbscan==0.8.27 \
-    plotly==4.14.3 \
-    dash==1.20.0 \
-    jupyter-dash==0.4.0
+    hdbscan==0.8.27
 
 RUN pip install \
     torch==1.7.1+cu110 \
     torchvision==0.8.2+cu110 \
     -f https://download.pytorch.org/whl/torch_stable.html
 
-
 RUN pip cache purge
-
-EXPOSE 8888
-ADD ./add/jupyter_lab_config.py /root/.jupyter/
-RUN jupyter lab build
-
-# Hack to deal with weird bug that prevents running `jupyter notebook` directly
-# from Docker ENTRYPOINT or CMD.
-# Use dumb shell script that runs `jupyter notebook` :(
-# https://github.com/ipython/ipython/issues/7062
-RUN mkdir -p /scripts
-ADD ./add/run_jupyter.sh /scripts/
-RUN chmod -R a+x /scripts
-ENTRYPOINT ["/scripts/run_jupyter.sh"]
