@@ -2,6 +2,9 @@
 
 FROM mudphudwang/base
 
+RUN /opt/conda/bin/conda install -y -c conda-forge nodejs=15.14.0 && \
+    /opt/conda/bin/conda clean -ya
+
 RUN pip install \
     gitpython==3.1.14 \
     graphviz==0.16 \
@@ -18,7 +21,7 @@ RUN pip install \
     matplotlib==3.4.1 \
     seaborn==0.11.1 \
     networkx==2.5.1 \
-    datajoint==0.13.1 \
+    datajoint==0.13.2 \
     jupyterlab==3.0.14 \
     streamlit==0.80.0 \
     statsmodels==0.12.2 \
@@ -27,7 +30,10 @@ RUN pip install \
     scikit-learn==0.24.1 \
     pynndescent==0.5.2 \
     umap-learn==0.5.1 \
-    hdbscan==0.8.27
+    hdbscan==0.8.27 \
+    plotly==4.14.3 \
+    dash==1.20.0 \
+    jupyter-dash==0.4.0
 
 RUN pip install \
     torch==1.7.1+cu110 \
@@ -39,6 +45,7 @@ RUN pip cache purge
 
 EXPOSE 8888
 ADD ./add/jupyter_lab_config.py /root/.jupyter/
+RUN jupyter lab build
 
 # Hack to deal with weird bug that prevents running `jupyter notebook` directly
 # from Docker ENTRYPOINT or CMD.
