@@ -3,16 +3,15 @@
 FROM mudphudwang/base
 
 RUN /opt/conda/bin/conda install -y -c conda-forge \
-    nodejs=15.14.0 \
     jupyterlab=3.0.14 \
     plotly=4.14.3 \
-    dash=1.20.0 \
-    jupyter-dash=0.4.0 && \
+    bokeh=2.3.1 && \
+    /opt/conda/bin/conda install -y -c pyviz \
+    holoviews=1.14.3 && \
     /opt/conda/bin/conda clean -ya
 
 EXPOSE 8888
 ADD ./add/jupyter_lab_config.py /root/.jupyter/
-RUN jupyter lab build
 
 # Hack to deal with weird bug that prevents running `jupyter notebook` directly
 # from Docker ENTRYPOINT or CMD.
