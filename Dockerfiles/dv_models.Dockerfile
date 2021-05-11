@@ -7,6 +7,7 @@ RUN /opt/conda/bin/conda install -y -c conda-forge \
     plotly=4.14.3 \
     bokeh=2.3.1 && \
     /opt/conda/bin/conda install -y -c pyviz \
+    datashader=0.12.1 \
     holoviews=1.14.3 && \
     /opt/conda/bin/conda clean -ya
 
