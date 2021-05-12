@@ -2,10 +2,17 @@
 
 FROM mudphudwang/base
 
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    firefox && \
+    rm -rf /var/lib/apt/lists/*
+
 RUN /opt/conda/bin/conda install -y -c conda-forge \
     jupyterlab=3.0.14 \
     plotly=4.14.3 \
-    bokeh=2.3.1 && \
+    bokeh=2.3.1 \
+    selenium=3.141.0 \
+    geckodriver=0.29.0 \
+    python-kaleido=0.2.1 && \
     /opt/conda/bin/conda install -y -c pyviz \
     datashader=0.12.1 \
     holoviews=1.14.3 && \
