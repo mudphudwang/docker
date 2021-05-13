@@ -12,7 +12,8 @@ RUN /opt/conda/bin/conda install -y -c conda-forge \
     bokeh=2.3.1 \
     selenium=3.141.0 \
     geckodriver=0.29.0 \
-    python-kaleido=0.2.1 && \
+    python-kaleido=0.2.1 \
+    nodejs=15.14.0 && \
     /opt/conda/bin/conda install -y -c pyviz \
     datashader=0.12.1 \
     holoviews=1.14.3 && \
@@ -20,6 +21,8 @@ RUN /opt/conda/bin/conda install -y -c conda-forge \
 
 EXPOSE 8888
 ADD ./add/jupyter_lab_config.py /root/.jupyter/
+
+RUN jupyter labextension install jupyterlab-plotly@4.14.3
 
 # Hack to deal with weird bug that prevents running `jupyter notebook` directly
 # from Docker ENTRYPOINT or CMD.
@@ -35,6 +38,7 @@ RUN pip install \
     graphviz==0.16 \
     wget==3.2 \
     xlrd==1.2.0 \
+    Jinja2==3.0.0 \
     imageio==2.9.0 \
     imageio-ffmpeg==0.4.3 \
     opencv-python==4.5.1.48 \
