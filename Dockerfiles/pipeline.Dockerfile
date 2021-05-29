@@ -1,12 +1,12 @@
 # mudphudwang/pipeline
 
-FROM ninai/stimulus-pipeline:latest
+FROM at-docker.ad.bcm.edu:5000/pipeline:latest 
 
 RUN pip3 install \
-    jupyterlab==2.2.0
+    jupyterlab==3.0.14
 
 EXPOSE 8888
-ADD ./add/jupyter_notebook_config.py /root/.jupyter/
+ADD ./add/jupyter_lab_config.py /root/.jupyter/
 
 # Hack to deal with weird bug that prevents running `jupyter notebook` directly
 # from Docker ENTRYPOINT or CMD.
