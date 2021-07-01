@@ -71,17 +71,18 @@ RUN pip install \
     imageio-ffmpeg==0.4.4 \
     opencv-python==4.5.2.54 \
     Pillow==8.2.0 \
-    h5py==3.2.1 \
-    numpy==1.20.3 \
-    scipy==1.6.3 \
-    pandas==1.2.4 \
+    h5py==3.3 \
+    numpy==1.21.0 \
+    scipy==1.7.0 \
+    pandas==1.2.5 \
+    xarray==0.18.2 \
     matplotlib==3.4.2 \
     seaborn==0.11.1 \
     networkx==2.5.1 \
     datajoint==0.13.2 \
     streamlit==0.83.0 \
     statsmodels==0.12.2 \
-    scikit-image==0.18.1 \
+    scikit-image==0.18.2 \
     scikit-video==1.1.11 \
     scikit-learn==0.24.2 \
     pynndescent==0.5.2 \
