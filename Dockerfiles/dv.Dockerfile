@@ -32,7 +32,6 @@ RUN curl -v -o ~/miniconda.sh -O  https://repo.anaconda.com/miniconda/Miniconda3
     python=$PYTHON_VERSION \
     av=8.0.3 \
     jupyterlab=3.0.16 \
-    ipywidgets=7.6.3 \
     plotly=5.1.0 \
     bokeh=2.3.2 \
     selenium=3.141.0 \
