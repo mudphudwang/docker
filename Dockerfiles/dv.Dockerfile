@@ -39,7 +39,7 @@ RUN curl -v -o ~/miniconda.sh -O  https://repo.anaconda.com/miniconda/Miniconda3
     python-kaleido=0.2.1 \
     nodejs=15.14.0 && \
     /opt/conda/bin/conda install -y -c pyviz \
-    param=1.11.0 \
+    param=1.11.1 \
     datashader=0.13.0 \
     holoviews=1.14.4 && \
     /opt/conda/bin/conda clean -ya
