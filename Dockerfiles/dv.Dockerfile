@@ -32,13 +32,15 @@ RUN curl -v -o ~/miniconda.sh -O  https://repo.anaconda.com/miniconda/Miniconda3
     python=$PYTHON_VERSION \
     av=8.0.3 \
     jupyterlab=3.0.16 \
-    plotly=4.14.3 \
+    ipywidgets=7.6.3 \
+    plotly=5.1.0 \
     bokeh=2.3.2 \
     selenium=3.141.0 \
     geckodriver=0.29.0 \
     python-kaleido=0.2.1 \
     nodejs=15.14.0 && \
     /opt/conda/bin/conda install -y -c pyviz \
+    param=1.11.0 \
     datashader=0.13.0 \
     holoviews=1.14.4 && \
     /opt/conda/bin/conda clean -ya
@@ -46,8 +48,6 @@ ENV PATH /opt/conda/bin:$PATH
 
 EXPOSE 8888
 ADD ./add/jupyter_lab_config.py /root/.jupyter/
-
-RUN jupyter labextension install jupyterlab-plotly@4.14.3
 
 # Hack to deal with weird bug that prevents running `jupyter notebook` directly
 # from Docker ENTRYPOINT or CMD.
